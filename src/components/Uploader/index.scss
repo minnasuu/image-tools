@@ -1,0 +1,35 @@
+.land-uploader{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--land-uploader-gap, 12px);
+  padding: var(--land-uploader-padding, 12px);
+  background-color: var(--land-uploader-background-color, var(--color-gray-2));
+  border-radius: var(--land-uploader-border-radius, 8px);
+  transition: background-color 0.3s linear;
+  cursor: pointer;
+  &.drag,
+  &:hover {
+    background-color: var(--land-uploader-hover-background-color, var(--color-gray-3));
+  }
+  &:active {
+    background-color: var(--land-uploader-active-background-color, var(--color-gray-4));
+  }
+  .land-uploader-icon {
+    font-size: var(--land-uploader-icon-font-size, 20px);
+    color: var(--land-uploader-icon-color, var(--color-gray-1));
+  }
+  .land-uploader-desc {
+    font-size: var(--land-uploader-desc-font-size, 14px);
+    color: var(--land-uploader-desc-color, var(--color-gray-1));
+    transition: all 0.3s linear;
+  }
+  .land-uploader-input{
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+}

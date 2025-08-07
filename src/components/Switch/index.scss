@@ -1,0 +1,70 @@
+.land-switch{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  &.disabled{
+    .land-switch-content{
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    cursor: not-allowed;
+  }
+  .land-switch-content{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    .land-switch-bar {
+      display: flex;
+      justify-content: start;
+      padding: 2px;
+      width: 36px;
+      height: 20px;
+      background-color: var(--color-gray-2);
+      border-radius: 24px;
+      flex-shrink: 0;
+      transition: background-color 0.3s linear;
+      &:hover {
+        background-color: var(--color-gray-3);
+      }
+      &:active {
+        background-color: var(--color-gray-4);
+      }
+    }
+    .land-switch-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      aspect-ratio: 1;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+    .land-switch-label {
+      font-size: 14px;
+      color: var(--color-gray-12);
+      user-select: none;
+    }
+    &.checked {
+      .land-switch-bar {
+        background-color: var(--color-gray-12);
+        transition-delay: 100ms;
+      }
+    }
+    &.dark{
+      .land-switch-bar{
+        background-color: rgba(0,0,0,0.2);
+        &:hover {
+          background-color: rgba(0,0,0,0.2);
+        }
+      }
+      &.checked{
+        .land-switch-bar {
+        background-color: var(--color-gray-12);
+        transition-delay: 100ms;
+      }
+      }
+      } 
+  }
+}

@@ -1,0 +1,381 @@
+@use "sass:map";
+@use "sass:list";
+
+// ===== 基础颜色系统 =====
+// 浅色模式颜色
+$grayColor: (
+  '#FAFAFA',
+  '#F5F5F5',
+  '#F0F0F0',
+  '#E2E2E2',
+  '#CCCCCC',
+  '#BABABA',
+  '#999999',
+  '#767676',
+  '#555555',
+  '#333333',
+  '#202020',
+  '#0d0d0d'
+);
+
+$primaryColor: (
+  '#EBF9FF',
+  '#D5F3FF',
+  '#B2E9FF',
+  '#88DDFF',
+  '#72D7FF',
+  '#58CFFF',
+  '#43C6FB',
+  '#28BBF7',
+);
+
+$redColor: (
+  '#FFECE8',
+  '#FBCBC4',
+  '#F7A9A1',
+  '#F3867E',
+  '#EF625D',
+  '#EB3D3D',
+  '#D83035',
+  '#BC212B',
+);
+
+$orangeColor: (
+  '#FFF7E8',
+  '#FFE6C0',
+  '#FFD298',
+  '#FFBC70',
+  '#FFA448',
+  '#FF8920',
+  '#F57C20',
+  '#EC721F',
+);
+
+$greenColor: (
+  '#E8FFEA',
+  '#BDF5C3',
+  '#95EBA1',
+  '#70E083',
+  '#4ED669',
+  '#2ECC52',
+  '#1DB947',
+  '#13AD3C',
+);
+
+$blueColor: (
+  '#E8F3FF',
+  '#BEDAFF',
+  '#94BFFF',
+  '#6AA1FF',
+  '#4080FF',
+  '#165DFF',
+  '#0040FF',
+  '#0033CC',
+);
+
+// ===== 深色模式颜色系统 =====
+// 深色模式灰度色 - 从深到浅
+$grayColorDark: (
+  '#FAFAFA',
+  '#F5F5F5',
+  '#F0F0F0',
+  '#E2E2E2',
+  '#CCCCCC',
+  '#BABABA',
+  '#999999',
+  '#767676',
+  '#555555',
+  '#333333',
+  '#202020',
+  '#0d0d0d'
+);
+
+// 深色模式主色 - 调整亮度和饱和度
+$primaryColorDark: (
+  '#001A26',
+  '#002B3D',
+  '#003D54',
+  '#004F6B',
+  '#006182',
+  '#007399',
+  '#0085B0',
+  '#0097C7',
+);
+
+// 深色模式红色 - 调整亮度和饱和度
+$redColorDark: (
+  '#260000',
+  '#3D0000',
+  '#540000',
+  '#6B0000',
+  '#820000',
+  '#990000',
+  '#B00000',
+  '#C70000',
+);
+
+// 深色模式橙色 - 调整亮度和饱和度
+$orangeColorDark: (
+  '#260F00',
+  '#3D1A00',
+  '#542500',
+  '#6B3000',
+  '#823B00',
+  '#994600',
+  '#B05100',
+  '#C75C00',
+);
+
+// 深色模式绿色 - 调整亮度和饱和度
+$greenColorDark: (
+  '#002600',
+  '#003D00',
+  '#005400',
+  '#006B00',
+  '#008200',
+  '#009900',
+  '#00B000',
+  '#00C700',
+);
+
+// 深色模式蓝色 - 调整亮度和饱和度
+$blueColorDark: (
+  '#001A26',
+  '#002B3D',
+  '#003D54',
+  '#004F6B',
+  '#006182',
+  '#007399',
+  '#0085B0',
+  '#0097C7',
+);
+
+// ===== 基础尺寸系统 =====
+$fontSizes: (
+  '10': 10px,
+  '12': 12px,
+  '14': 14px,
+  '16': 16px,
+  '20': 20px,
+  '24': 24px,
+  '28': 28px,
+  '32': 32px,
+  '36': 36px,
+  '48': 48px,
+  '64': 64px
+);
+
+$spacings: (
+  '2': 2px,
+  '4': 4px,
+  '8': 8px,
+  '12': 12px,
+  '16': 16px,
+  '20': 20px,
+  '24': 24px,
+  '32': 32px
+);
+
+$borderRadius: (
+  '2': 2px,
+  '4': 4px,
+  '8': 8px,
+  '12': 12px,
+  '16': 16px,
+  '20': 20px,
+  '24': 24px,
+  '999': 999px,
+);
+
+$iconSizes: (
+  's': 12px,
+  'm': 16px,
+  'l': 20px,
+  'xl': 24px
+);
+
+$zIndex: (
+  'min': -1,
+  '0': 0,
+  '1': 1,
+  '2': 2,
+  '3': 3,
+  '4': 4,
+  '5': 5,
+  '6': 6,
+  '7': 7,
+  '8': 8,
+  '9': 9,
+  '10': 10,
+  '100': 100,
+  '1000': 1000,
+  '1024': 1024,
+  '1025': 1025
+);
+
+$transitions: (
+  's': 0.15s,
+  'm': 0.3s,
+  'l': 0.5s,
+  'xl': 0.8s
+);
+
+$shadows: (
+  's': '0px 4px 10px 0px rgba(0, 0, 0, 0.07), 0px 12px 24px 0px rgba(0, 0, 0, 0.08)',
+  'm': 0 0 10px rgba(0, 0, 0, 0.1),
+  'l': 0 0 20px rgba(0, 0, 0, 0.1)
+);
+
+$blurs: (
+  's': blur(5px),
+  'm': blur(10px),
+  'l': blur(20px)
+);
+
+// ===== 基础CSS变量生成 =====
+:root {
+  // 颜色变量
+  --color-white: #FFF;
+  --color-black: #000;
+  
+  // 灰度色 - 浅色模式
+  @for $i from 1 through list.length($grayColor) {
+    --color-gray-#{$i}: #{list.nth($grayColor, $i)};
+  }
+  
+  // 主色 - 浅色模式
+  @for $i from 1 through list.length($primaryColor) {
+    --color-primary-#{$i}: #{list.nth($primaryColor, $i)};
+  }
+  
+  // 红色 - 浅色模式
+  @for $i from 1 through list.length($redColor) {
+    --color-red-#{$i}: #{list.nth($redColor, $i)};
+  }
+  
+  // 橙色 - 浅色模式
+  @for $i from 1 through list.length($orangeColor) {
+    --color-orange-#{$i}: #{list.nth($orangeColor, $i)};
+  }
+  
+  // 绿色 - 浅色模式
+  @for $i from 1 through list.length($greenColor) {
+    --color-green-#{$i}: #{list.nth($greenColor, $i)};
+  }
+  
+  // 蓝色 - 浅色模式
+  @for $i from 1 through list.length($blueColor) {
+    --color-blue-#{$i}: #{list.nth($blueColor, $i)};
+  }
+  
+  // 字号
+  @each $size, $value in $fontSizes {
+    --font-size-#{$size}: #{$value};
+  }
+  
+  // 间距
+  @each $size, $value in $spacings {
+    --spacing-#{$size}: #{$value};
+  }
+  
+  // 圆角
+  @each $size, $value in $borderRadius {
+    --radius-#{$size}: #{$value};
+  }
+  
+  // 图标尺寸
+  @each $size, $value in $iconSizes {
+    --icon-#{$size}: #{$value};
+  }
+  
+  // 层级
+  @each $level, $value in $zIndex {
+    --z-index-#{$level}: #{$value};
+  }
+  
+  // 过渡
+  @each $speed, $value in $transitions {
+    --transition-#{$speed}: #{$value};
+  }
+  
+  // 阴影
+  @each $size, $value in $shadows {
+    --shadow-#{$size}: #{$value};
+  }
+  
+  // 模糊
+  @each $size, $value in $blurs {
+    --blur-#{$size}: #{$value};
+  }
+  
+  // 透明度
+  --opacity-disabled: 0.6;
+}
+
+// ===== 深色模式CSS变量 =====
+@media (prefers-color-scheme: dark) {
+  :root {
+    // 灰度色 - 深色模式
+    @for $i from 1 through list.length($grayColorDark) {
+      --color-gray-#{$i}: #{list.nth($grayColorDark, $i)};
+    }
+    
+    // 主色 - 深色模式
+    @for $i from 1 through list.length($primaryColorDark) {
+      --color-primary-#{$i}: #{list.nth($primaryColorDark, $i)};
+    }
+    
+    // 红色 - 深色模式
+    @for $i from 1 through list.length($redColorDark) {
+      --color-red-#{$i}: #{list.nth($redColorDark, $i)};
+    }
+    
+    // 橙色 - 深色模式
+    @for $i from 1 through list.length($orangeColorDark) {
+      --color-orange-#{$i}: #{list.nth($orangeColorDark, $i)};
+    }
+    
+    // 绿色 - 深色模式
+    @for $i from 1 through list.length($greenColorDark) {
+      --color-green-#{$i}: #{list.nth($greenColorDark, $i)};
+    }
+    
+    // 蓝色 - 深色模式
+    @for $i from 1 through list.length($blueColorDark) {
+      --color-blue-#{$i}: #{list.nth($blueColorDark, $i)};
+    }
+  }
+}
+
+// ===== 手动深色模式类 =====
+[data-theme="dark"] {
+  // 灰度色 - 深色模式
+  @for $i from 1 through list.length($grayColorDark) {
+    --color-gray-#{$i}: #{list.nth($grayColorDark, $i)};
+  }
+  
+  // 主色 - 深色模式
+  @for $i from 1 through list.length($primaryColorDark) {
+    --color-primary-#{$i}: #{list.nth($primaryColorDark, $i)};
+  }
+  
+  // 红色 - 深色模式
+  @for $i from 1 through list.length($redColorDark) {
+    --color-red-#{$i}: #{list.nth($redColorDark, $i)};
+  }
+  
+  // 橙色 - 深色模式
+  @for $i from 1 through list.length($orangeColorDark) {
+    --color-orange-#{$i}: #{list.nth($orangeColorDark, $i)};
+  }
+  
+  // 绿色 - 深色模式
+  @for $i from 1 through list.length($greenColorDark) {
+    --color-green-#{$i}: #{list.nth($greenColorDark, $i)};
+  }
+  
+  // 蓝色 - 深色模式
+  @for $i from 1 through list.length($blueColorDark) {
+    --color-blue-#{$i}: #{list.nth($blueColorDark, $i)};
+  }
+}
