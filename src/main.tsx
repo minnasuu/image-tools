@@ -6,7 +6,7 @@ import "./style/index.scss";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/image-tools">
       <App />
     </BrowserRouter>
   </React.StrictMode>
