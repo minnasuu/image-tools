@@ -7,7 +7,7 @@ export const IMG_EFFECT_PROJECT_DATA = [
         desc: '获取图片像素数据，统计出现频次最高的颜色，支持调整取色数量和过滤中性色',
         date: '2025-02-24',
         src:'pickMainColors',
-        icon: '/icon-1.png'
+        icon: '/image-tools/icon-1.png'
     },
     {
         id:'2',
@@ -15,7 +15,7 @@ export const IMG_EFFECT_PROJECT_DATA = [
         desc: '获取图片像素数据，将若干像素合并成区域主色，输出新的图片',
         date: '2025-02-24',
         src:'imgPixel',
-        icon: '/icon-2.png'
+        icon: '/image-tools/icon-2.png'
     },
     {
         id:'3',
@@ -23,7 +23,7 @@ export const IMG_EFFECT_PROJECT_DATA = [
         desc: '获取图片像素数据，将指定颜色换成目标新色，输出新的图片',
         date: '2025-03-09',
         src:'imgColorChange',
-        icon: '/icon-3.png'
+        icon: '/image-tools/icon-3.png'
     }
     // {
     //     id:'4',

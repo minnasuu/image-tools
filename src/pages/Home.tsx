@@ -42,15 +42,18 @@ const Home: React.FC = () => {
         </div>
         <div
           style={{
-            gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))",
+            // gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))",
             maxWidth: "960px",
           }}
-          className={"grid gap-20 mx-auto width-100"}
+          className={"flex flex-wrap gap-20 mx-auto"}
         >
           {data?.map((item, index: number) => (
             <a
               key={item.id ?? index}
               className={"flex column gap-12 cursor-pointer"}
+              style={{
+                width: "300px",
+              }}
               onClick={() => navigate(`${item.src}`)}
             >
               <div
