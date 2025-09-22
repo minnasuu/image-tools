@@ -1,0 +1,143 @@
+.range-slider {
+  display: flex;
+  gap: 8px;
+  width: 200px;
+
+  &__label {
+    font-size: 12px;
+    color: var(--color-gray-3);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  &__track {
+    flex: 1;
+    height: 20px;
+    padding: 0 1px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: background 0.2s ease;
+  }
+
+  &__input[type="range"] {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    appearance: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    z-index: 2;
+
+    // Webkit (Chrome, Safari, Edge)
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #333;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      outline: 1px solid #333;
+
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    // Firefox
+    &::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--color-primary-6);
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    // Firefox track
+    &::-moz-range-track {
+      background: transparent;
+      border: none;
+      height: 100%;
+    }
+
+    // Firefox progress
+    &::-moz-range-progress {
+      background: var(--color-primary-2);
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+
+      &::-webkit-slider-thumb {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+
+      &::-moz-range-thumb {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+  }
+
+  // 响应式设计
+  @media (max-width: 768px) {
+    &__container {
+      gap: 8px;
+    }
+
+    &__track {
+      height: 18px;
+    }
+
+    &__input {
+      &::-webkit-slider-thumb {
+        width: 14px;
+        height: 14px;
+      }
+
+      &::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &__value {
+      font-size: 11px;
+      min-width: 20px;
+      padding: 1px 4px;
+    }
+  }
+}

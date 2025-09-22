@@ -21,12 +21,15 @@ const Uploader: React.FC<UploaderProps> = ({
 
   const handleChange = (e: any, file: any) => {
     e.preventDefault();
-    setLoading(true);
     if (file) {
+      setLoading(true);
       setFile(file);
       let reader = new FileReader();
       reader.readAsDataURL(file);
       setUrl(URL.createObjectURL(file));
+      setLoading(false);
+    } else {
+      // 如果用户取消上传，确保不显示上传中状态
       setLoading(false);
     }
   };

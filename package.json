@@ -13,7 +13,6 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@suminhan/land-design": "^0.0.80",
     "motion": "^12.23.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

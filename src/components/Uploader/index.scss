@@ -10,6 +10,7 @@
   border-radius: var(--land-uploader-border-radius, 8px);
   transition: background-color 0.3s linear;
   cursor: pointer;
+  box-sizing: border-box;
   &.drag,
   &:hover {
     background-color: var(--land-uploader-hover-background-color, var(--color-gray-3));
@@ -23,7 +24,7 @@
   }
   .land-uploader-desc {
     font-size: var(--land-uploader-desc-font-size, 14px);
-    color: var(--land-uploader-desc-color, var(--color-gray-1));
+    color: var(--land-uploader-desc-color, var(--color-gray-8));
     transition: all 0.3s linear;
   }
   .land-uploader-input{

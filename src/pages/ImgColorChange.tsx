@@ -5,6 +5,7 @@ import Switch from "../components/Switch";
 
 const ImgColorChange = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const isCancelledRef = useRef(false);
     const [imgUrl, setImgUrl] = useState("");
     const [mainColors, setMainColors] = useState<string[]>([]);
     const [selectedColors, setSelectedColors] = useState<{original: string, new: string}[]>([]);
@@ -71,7 +72,7 @@ const ImgColorChange = () => {
         // 获取出现频率最高的三种颜色
         return Object.entries(mergedColors)
             .sort(([, a], [, b]) => b - a)
-            .slice(0, 3)
+            .slice(0, 8)
             .map(([color]) => {
                 const [r, g, b] = color.split(',').map(Number);
                 return `rgb(${r}, ${g}, ${b})`;
@@ -225,6 +226,7 @@ const ImgColorChange = () => {
         
         setLoading(true);
         setIsCancelled(false);
+        isCancelledRef.current = false;
         
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
@@ -232,17 +234,33 @@ const ImgColorChange = () => {
         // 使用 requestAnimationFrame 进行分批处理
         let currentIndex = 0;
         const batchSize = 10000; // 每批处理的像素数
+        let animationId: number | null = null;
 
         const processNextBatch = () => {
-            if (isCancelled) {
+            // 立即检查取消状态
+            if (isCancelledRef.current) {
                 setLoading(false);
+                setIsCancelled(true);
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
                 return;
             }
 
             const endIndex = Math.min(currentIndex + batchSize, data.length);
             
-            // 处理当前批次的像素
+            // 处理当前批次的像素，在循环中也检查取消状态
             for (let i = currentIndex; i < endIndex; i += 4) {
+                // 在像素处理循环中检查取消状态
+                if (isCancelledRef.current) {
+                    setLoading(false);
+                    setIsCancelled(true);
+                    if (animationId) {
+                        cancelAnimationFrame(animationId);
+                    }
+                    return;
+                }
+
                 const r = data[i];
                 const g = data[i + 1];
                 const b = data[i + 2];
@@ -288,22 +306,25 @@ const ImgColorChange = () => {
             ctx.putImageData(imageData, 0, 0);
             setResultImageUrl(canvas.toDataURL());
 
-            // 如果还有未处理的像素，继续下一批
-            if (currentIndex < data.length && !isCancelled) {
-                requestAnimationFrame(processNextBatch);
+            // 如果还有未处理的像素且未被取消，继续下一批
+            if (currentIndex < data.length && !isCancelledRef.current) {
+                animationId = requestAnimationFrame(processNextBatch);
             } else {
                 setLoading(false);
                 setHasModified(true); // 标记已经修改过
+                animationId = null;
             }
         };
 
         // 开始处理第一批
-        requestAnimationFrame(processNextBatch);
+        animationId = requestAnimationFrame(processNextBatch);
     };
 
     // 取消合成
     const handleCancel = () => {
+        isCancelledRef.current = true;
         setIsCancelled(true);
+        setLoading(false);
     };
     // 重置合成
     const handleReset = () => {
@@ -351,7 +372,10 @@ const ImgColorChange = () => {
                  style={{maxWidth: '848px', boxSizing: 'border-box'}}>
                     <Uploader onUpload={(url, _file) => {
                         setImgUrl(url as string);
-                    }} style={{ height: '240px' }}>
+                    }} style={{ height: '240px' }}
+                    fileType="image/*"
+                    desc="图片大小不超过500KB"
+                    >
                         {imgUrl && <img src={imgUrl} alt="" width={'100%'} height={'100%'} className={'object-contain'}/>}
                     </Uploader>
 

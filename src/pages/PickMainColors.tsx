@@ -4,6 +4,7 @@ import tinycolor from 'tinycolor2';
 import getPixelData from "../utils/getPixelData.ts";
 import Navigation from "../components/Navigation";
 import Uploader from "../components/Uploader";
+import { message } from "../utils/MessagePlugin.ts";
 
 
 const PickMainColors = () => {
@@ -79,6 +80,11 @@ const PickMainColors = () => {
     }
 
   }
+
+  const handleColorClick = (color: string) => {
+    navigator.clipboard.writeText(color);
+    message.success(`复制成功: ${color}`);
+  }
   return (
     <div className={'width-100 height-100 overflow-auto flex column'}>
       <Navigation title="提取图片主色" />
@@ -88,6 +94,7 @@ const PickMainColors = () => {
           setImgUrl(url as string);
           }}
             style={{height: '240px'}}
+            fileType="image/*"
           >
             {imgUrl && <img src={imgUrl} alt="" width={'100%'} height={'100%'} className={'object-contain'}/>}
         </Uploader>
@@ -95,18 +102,18 @@ const PickMainColors = () => {
       <div className={'flex gap-12 items-center'}>
         <div className={'flex-1 flex gap-8 items-center fs-12 color-gray-3 no-wrap'}>数量: <input type="number" value={colorCount}
           onChange={(e) => setColorCount(Number(e.target.value))}
-          min={1} max={20} />
+          min={1} max={20} style={{width: '80px'}}/>
         </div>
         <div className={'flex-1 flex gap-8 items-center fs-12 color-gray-3 no-wrap'}>过滤中性色: <input type="number" value={filter}
           onChange={(e) => setFilter(Number(e.target.value))}
-          min={0} max={50} />
+          min={0} max={50} step={5} style={{width: '80px'}}/>
         </div>
         <button type="button" className={'primary mx-auto'} onClick={handleClick} disabled={loading}>{loading ?
           '提取中...' : '提取主色'}</button>
       </div>
       <div className={'grid gap-32 justify-center mt-24 width-100'} style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(24px, 36px))' }}>
         {colors?.map(item => <div key={item} className={'flex column gap-8'}>
-          <div className={'width-100 radius-50'} style={{ backgroundColor: item, aspectRatio: '1' }}></div>
+          <div className={'width-100 radius-50 cursor-pointer'} style={{ backgroundColor: item, aspectRatio: '1' }} onClick={() => handleColorClick(item)}></div>
           <div className={'fs-12 color-gray-3'}>{item}</div>
         </div>)}
       </div>

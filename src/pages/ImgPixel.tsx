@@ -2,6 +2,8 @@
 import {useEffect, useMemo, useRef, useState} from "react";
 import Navigation from "../components/Navigation";
 import Uploader from "../components/Uploader";
+import RangeSlider from "../components/RangeSlider";
+import { message } from "../utils/MessagePlugin.ts";
 type Props = {
     defaultUrl?:string
 }
@@ -17,7 +19,6 @@ const ImgPixel:React.FC<Props> = ({
     const [pixelSize, setPixelSize] = useState<number>(1);
     const [loading, setLoading] = useState(false);
     const [imgData,setImgData] = useState<Uint8ClampedArray | null>(null);
-    const [errorMsg, setErrorMsg] = useState<string>(""); // 添加错误信息状态
     
     useEffect(() => {
         defaultUrl && setImgUrl(defaultUrl);
@@ -31,11 +32,10 @@ const ImgPixel:React.FC<Props> = ({
     const handleImageUpload = (url: any, file?: any) => {
         // 检查文件大小是否超过500KB
         if (file && file.size > 500 * 1024) {
-            setErrorMsg("图片过大，请上传小于500KB的图片");
+            message.error("图片过大，请上传小于500KB的图片");
             return;
         }
         
-        setErrorMsg(""); // 清除错误信息
         setImgUrl(url);
     };
     
@@ -183,24 +183,30 @@ const ImgPixel:React.FC<Props> = ({
             <Navigation title="图片像素化" />
             <div className={'flex column gap-24 px-24 pt-32 width-100 height-100 mx-auto'}
                  style={{maxWidth: '848px', boxSizing: 'border-box'}}>
-                <Uploader onUpload={handleImageUpload} style={{ height: '240px' }}>
+                <Uploader 
+                onUpload={handleImageUpload} 
+                style={{ height: '240px' }} 
+                fileType="image/*"
+                desc="图片大小不超过500KB"
+                >
                     {imgUrl && <img src={imgUrl} alt="" width={'100%'} height={'100%'} className={'object-contain'} />}
-                    {errorMsg && !imgUrl && <div className="color-error fs-14 text-center">{errorMsg}</div>}
                 </Uploader>
             <div className={'flex gap-12 items-center'}>
-                <div className={'flex-1 flex gap-8 items-center fs-12 color-gray-3 no-wrap'}>程度:
-                    <input type="range"
+                <div className={'flex-1'}>
+                    <RangeSlider
+                        label="程度"
                         value={pixelSize}
-                        onChange={(e) => {
-                            const val = Number(e.target.value);
+                        min={1}
+                        max={pixelMax}
+                        step={1}
+                        onChange={(val) => {
                             if(val > pixelMax) return;
                             pixelateImage(val);
                             pixelateImage2(val);
                             setPixelSize(val);
                         }}
-                            min={1}
-                        max={pixelMax}
-                        step={1}/>
+                        disabled={loading || !imgUrl}
+                    />
                 </div>
                 <button type="button" className={'primary mx-auto'}
                             onClick={() => {
