@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/image-tools/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片处理工具</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      // 重定向到正确的路径
+      const path = window.location.pathname;
+      if (path.startsWith('/image-tools/')) {
+        window.location.href = '/image-tools/';
+      } else {
+        window.location.href = '/image-tools/';
+      }
+    </script>
+  </body>
+</html>
+
+
